@@ -1,16 +1,11 @@
-<!doctype html>
-<html lang="en-US">
-  <head>
-    <title>Todo App</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans">
-  </head>
-  <body>
-    <header>
-      <h1>Contacts</h1>
-    </header>
-    <main>
-      
-    </main>
-  </body>
-</html>
+<% content_for :header do %>
+	<h1>Contacts</h1>
+<% end %>
+
+<ul>
+	<% @contacts.each do |contact| %>
+		<li><a href="/contacts/<%= contact[:id] %>">
+			<%= "#{contact[:first_name]} #{contact[:last_name]}" %>
+		</a></li>
+	<% end %>
+</ul>

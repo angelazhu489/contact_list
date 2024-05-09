@@ -1,0 +1,9 @@
+<% content_for :header do %>
+	<h1><%= "#{@contact[:first_name]} #{@contact[:last_name]}" %></h1>
+<% end %>
+
+<h3>Phone Number: </h3>
+<p><%= @contact[:phone_number] %></p>
+
+<h3>Email: </h3>
+<p><%= @contact[:email] %></p>
