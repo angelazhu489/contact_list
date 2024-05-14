@@ -9,6 +9,11 @@
 		<header>
     	<%= yield_content :header %>
 		</header>
+
+		<% if session[:message] %>
+			<p><%= session.delete(:message) %></p>
+		<% end %>
+		
     <main>
       <%= yield %>
     </main>

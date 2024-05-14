@@ -1,0 +1,22 @@
+<% content_for :header do %>
+	<h1>Editing: <%= "#{@contact[:first_name]} #{@contact[:last_name]}" %></h1>
+	<a href="/contacts">All Contacts</a>
+<% end %>
+
+<form action="/contacts/<%= @id %>" method="post">
+	<dl>
+		<% @contact.each do |key, val| %>
+			<% next if key.to_s == "id" %>
+			<dt>
+				<label for="<%= key.to_s %>"><%= format_sym_to_label(key) %>: </label>
+			</dt>
+			<dd>
+				<input name="<%= key.to_s %>" placeholder="<%= val %>" type="<%= field_type(key) %>" value="<%= val %>">
+			</dd>
+		<% end %>
+	</dl>
+	<fieldset>
+		<input type="submit" value="save">
+		<a href="/contacts/<%= @id %>">Cancel</a>
+	</fieldset>
+</form>

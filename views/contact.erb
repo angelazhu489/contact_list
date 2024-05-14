@@ -1,9 +1,15 @@
 <% content_for :header do %>
 	<h1><%= "#{@contact[:first_name]} #{@contact[:last_name]}" %></h1>
+	<a href="/contacts">All Contacts</a>
 <% end %>
 
-<h3>Phone Number: </h3>
-<p><%= @contact[:phone_number] %></p>
+<dl>
+	<dt>Phone Number: </dt>
+	<dd><%= @contact[:phone_number] %></dd>
+</dl>
+<dl>
+	<dt>Email: </dt>
+	<dd><%= @contact[:email] %></dd>
+</dl>
 
-<h3>Email: </h3>
-<p><%= @contact[:email] %></p>
+<a href="/contacts/<%= @id %>/edit">Edit</a>
