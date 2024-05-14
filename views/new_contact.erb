@@ -1,0 +1,20 @@
+<% content_for :header do %>
+	<h1>New Contact</h1>
+<% end %>
+
+<form action="/contacts/new" method="post">
+	<dl>
+		<% [:first_name, :last_name, :phone_number, :email].each do |field| %>
+			<dt>
+				<label for="<%= field.to_s %>"><%= format_sym_to_label(field) %>: </label>
+			</dt>
+			<dd>
+				<input name="<%= field.to_s %>" placeholder="<%= format_sym_to_label(field) %>" type="<%= field_type(field) %>">
+			</dd>
+		<% end %>
+	</dl>
+	<fieldset>
+		<input type="submit" value="Create">
+		<a href="/contacts">Cancel</a>
+	</fieldset>
+</form>

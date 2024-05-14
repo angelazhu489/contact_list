@@ -56,6 +56,30 @@ get "/" do
 	redirect "/contacts"
 end
 
+# Render add contact form
+get "/contacts/new" do
+	erb :new_contact, layout: :layout
+end
+
+# Add a contact
+post "/contacts/new" do
+	@id = params[:id].to_i
+	fields = { first_name: params[:first_name].capitalize,
+						 last_name: params[:last_name].capitalize,
+						 phone_number: params[:phone_number],
+						 email: params[:email] }
+	p fields
+	error = error_for_params(fields)
+	if error
+		session[:message] = error
+		erb :new_contact, layout: :layout
+	else
+		@storage.add_contact(fields)
+		session[:message] = "The contact has been added."
+		redirect "/"
+	end
+end
+
 # View all contacts
 get "/contacts" do
 	@contacts = @storage.all_contacts
@@ -73,14 +97,14 @@ end
 get "/contacts/:id/edit" do
 	@id = params[:id].to_i
 	@contact = @storage.find_contact(@id)
-	erb :edit_contact
+	erb :edit_contact, layout: :layout
 end
 
 # Edit a contact
 post "/contacts/:id" do
 	@id = params[:id].to_i
-	fields = { first_name: params[:first_name],
-						 last_name: params[:last_name],
+	fields = { first_name: params[:first_name].capitalize,
+						 last_name: params[:last_name].capitalize,
 						 phone_number: params[:phone_number],
 						 email: params[:email] }
 	@contact = @storage.find_contact(@id)
@@ -95,10 +119,6 @@ post "/contacts/:id" do
 		redirect "/contacts/#{@id}"
 	end
 end
-
-# Render add contact form
-
-# Add a contact
 
 # Delete a contact
 
