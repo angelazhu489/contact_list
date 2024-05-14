@@ -37,6 +37,17 @@ class DatabasePersistence
 		@db.exec_params(sql, sql_args)
 	end
 
+	# Delete row of table
+	def delete_contact(id)
+		sql = "DELETE FROM contacts WHERE id = $1"
+		@db.exec_params(sql, [id])
+	end
+
+	# Delete all rows of table
+	def delete_all_contacts
+		@db.exec("DELETE FROM contacts")
+	end
+
 	private
 
 	# Format sql tuple to application hash

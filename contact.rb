@@ -68,7 +68,6 @@ post "/contacts/new" do
 						 last_name: params[:last_name].capitalize,
 						 phone_number: params[:phone_number],
 						 email: params[:email] }
-	p fields
 	error = error_for_params(fields)
 	if error
 		session[:message] = error
@@ -78,6 +77,19 @@ post "/contacts/new" do
 		session[:message] = "The contact has been added."
 		redirect "/"
 	end
+end
+
+# Delete a contact
+post "/contacts/:id/delete" do
+	@id = params[:id].to_i
+	@storage.delete_contact(@id)
+	redirect "/"
+end
+
+# Delete all contacts
+post "/contacts/delete" do
+	@storage.delete_all_contacts
+	redirect "/"
 end
 
 # View all contacts
@@ -119,7 +131,3 @@ post "/contacts/:id" do
 		redirect "/contacts/#{@id}"
 	end
 end
-
-# Delete a contact
-
-# Delete all contacts

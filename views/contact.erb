@@ -13,3 +13,7 @@
 </dl>
 
 <a href="/contacts/<%= @id %>/edit">Edit</a>
+
+<form action="/contacts/<%= @contact[:id] %>/delete" method="post">
+	<button type="submit" class="delete">Delete List</button>
+</form>
